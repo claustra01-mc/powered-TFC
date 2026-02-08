@@ -18,6 +18,17 @@ group = mod_group_id
 
 repositories {
     // Add here additional repositories if required by some of the dependencies below.
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 base {
@@ -95,6 +106,17 @@ dependencies {
     // And its provides the option to then use net.minecraft as the group, and one of; client, server or joined as the module name, plus the game version as version.
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
+
+    // Mod dependencies (pulled from Modrinth Maven).
+    // Use compileOnly for development-time API access, and localRuntime to have them present when running the game.
+    compileOnly "maven.modrinth:create:${create_version}"
+    localRuntime "maven.modrinth:create:${create_version}"
+
+    compileOnly "maven.modrinth:terrafirmacraft:${tfc_version}"
+    localRuntime "maven.modrinth:terrafirmacraft:${tfc_version}"
+
+    // TerraFirmaCraft requires Patchouli at runtime.
+    localRuntime "maven.modrinth:patchouli:${patchouli_version}"
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
