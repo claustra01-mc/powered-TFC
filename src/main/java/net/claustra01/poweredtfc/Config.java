@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package net.claustra01.poweredtfc;
 
 import java.util.List;
 import java.util.Set;

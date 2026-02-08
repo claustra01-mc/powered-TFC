@@ -1,0 +1,13 @@
+{
+  "itemGroup.poweredtfc": "Powered TFC",
+  "block.poweredtfc.example_block": "Powered TFC Block",
+  "item.poweredtfc.example_item": "Powered TFC Item",
+
+  "poweredtfc.configuration.title": "Powered TFC Configs",
+  "poweredtfc.configuration.section.poweredtfc.common.toml": "Powered TFC Configs",
+  "poweredtfc.configuration.section.poweredtfc.common.toml.title": "Powered TFC Configs",
+  "poweredtfc.configuration.items": "Item List",
+  "poweredtfc.configuration.logDirtBlock": "Log Dirt Block",
+  "poweredtfc.configuration.magicNumberIntroduction": "Magic Number Text",
+  "poweredtfc.configuration.magicNumber": "Magic Number"
+}
