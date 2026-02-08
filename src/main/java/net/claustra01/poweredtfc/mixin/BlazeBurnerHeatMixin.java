@@ -28,15 +28,18 @@ public abstract class BlazeBurnerHeatMixin extends SmartBlockEntity {
         }
 
         BlazeBurnerBlock.HeatLevel heatLevel = ((BlazeBurnerBlockEntity) (Object) this).getHeatLevelFromBlock();
-        int step = switch (heatLevel) {
-            case SMOULDERING -> PoweredTFCConfig.BLAZE_BURNER_HEAT_PER_LEVEL.get();
-            case FADING -> PoweredTFCConfig.BLAZE_BURNER_HEAT_PER_LEVEL.get();
-            case KINDLED -> PoweredTFCConfig.BLAZE_BURNER_HEAT_PER_LEVEL.get();
-            case SEETHING -> PoweredTFCConfig.BLAZE_BURNER_HEAT_PER_LEVEL.get();
-            default -> 0;
+        double temperature = switch (heatLevel) {
+            case SMOULDERING -> PoweredTFCConfig.BLAZE_BURNER_HEAT_SMOULDERING.get();
+            case FADING -> PoweredTFCConfig.BLAZE_BURNER_HEAT_FADING.get();
+            case KINDLED -> PoweredTFCConfig.BLAZE_BURNER_HEAT_KINDLED.get();
+            case SEETHING -> PoweredTFCConfig.BLAZE_BURNER_HEAT_SEETHING.get();
+            default -> 0.0d;
         };
-        float temperature = (float) (step);
 
-        HeatCapability.provideHeatTo(level, worldPosition.above(), Direction.DOWN, temperature);
+        if (temperature <= 0.0d) {
+            return;
+        }
+
+        HeatCapability.provideHeatTo(level, worldPosition.above(), Direction.DOWN, (float) temperature);
     }
 }

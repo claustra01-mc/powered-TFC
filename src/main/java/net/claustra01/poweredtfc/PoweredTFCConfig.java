@@ -18,17 +18,17 @@ public final class PoweredTFCConfig {
         builder.comment("Heat delivered by Create Blaze Burner (per heat level step).")
                 .push("blaze_burner");
         BLAZE_BURNER_HEAT_SMOULDERING = builder
-                .comment("Temperature provided at Smouldering level. Default: 100C.")
+                .comment("Temperature provided at Smouldering level. Default: 100C (Hot).")
                 .defineInRange("smoulderingHeat", 100.0d, 0.0d, 10000.0d);
         BLAZE_BURNER_HEAT_FADING = builder
-                .comment("Temperature provided at Fading level. Default: 800C.")
-                .defineInRange("fadingHeat", 800.0d, 0.0d, 10000.0d);
+                .comment("Temperature provided at Fading level. Default: 1100C (Yellow).")
+                .defineInRange("fadingHeat", 1100.0d, 0.0d, 10000.0d);
         BLAZE_BURNER_HEAT_KINDLED = builder
-                .comment("Temperature provided at Kindled level. Default: 1350C.")
-                .defineInRange("kindledHeat", 1350.0d, 0.0d, 10000.0d);
+                .comment("Temperature provided at Kindled level. Default: 1300C (Yellow White).")
+                .defineInRange("kindledHeat", 1300.0d, 0.0d, 10000.0d);
         BLAZE_BURNER_HEAT_SEETHING = builder
-                .comment("Temperature provided at Seething level. Default: 1600C.")
-                .defineInRange("seethingHeat", 1600.0d, 0.0d, 10000.0d);
+                .comment("Temperature provided at Seething level. Default: 1500C (Brilliant White).")
+                .defineInRange("seethingHeat", 1500.0d, 0.0d, 10000.0d);
         builder.pop();
 
         builder.comment("Air delivered by Create Encased Fan when blowing horizontally.")
