@@ -18,6 +18,7 @@ group = mod_group_id
 
 repositories {
     // Add here additional repositories if required by some of the dependencies below.
+    mavenCentral()
     exclusiveContent {
         forRepository {
             maven {
@@ -96,6 +97,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 // "optional", meaning it will not be pulled by dependents of this mod.
 configurations {
     runtimeClasspath.extendsFrom localRuntime
+    createJarJar
 }
 
 dependencies {
@@ -111,6 +113,10 @@ dependencies {
     // Use compileOnly for development-time API access, and localRuntime to have them present when running the game.
     compileOnly "maven.modrinth:create:${create_version}"
     localRuntime "maven.modrinth:create:${create_version}"
+
+    // Create bundles these via jar-in-jar; add them for compilation (resolved from the Create jar).
+    createJarJar "maven.modrinth:create:${create_version}"
+    compileOnly fileTree(layout.buildDirectory.dir("jarjar")) { include "**/*.jar" }
 
     compileOnly "maven.modrinth:terrafirmacraft:${tfc_version}"
     localRuntime "maven.modrinth:terrafirmacraft:${tfc_version}"
@@ -179,6 +185,21 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+tasks.register("extractCreateJarJar", Copy) {
+    from(zipTree(configurations.createJarJar.singleFile)) {
+        include "META-INF/jarjar/*.jar"
+        eachFile { fileCopyDetails ->
+            fileCopyDetails.path = fileCopyDetails.name
+        }
+        includeEmptyDirs = false
+    }
+    into(layout.buildDirectory.dir("jarjar"))
+}
+
+tasks.named("compileJava").configure {
+    dependsOn(tasks.named("extractCreateJarJar"))
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
