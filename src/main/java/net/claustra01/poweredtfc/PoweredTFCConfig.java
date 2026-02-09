@@ -27,8 +27,8 @@ public final class PoweredTFCConfig {
                 .comment("Temperature provided at Kindled level. Default: 1300C (Yellow White).")
                 .defineInRange("kindledHeat", 1300.0d, 0.0d, 10000.0d);
         BLAZE_BURNER_HEAT_SEETHING = builder
-                .comment("Temperature provided at Seething level. Default: 1500C (Brilliant White).")
-                .defineInRange("seethingHeat", 1500.0d, 0.0d, 10000.0d);
+                .comment("Temperature provided at Seething level. Default: 1600C (Brilliant White).")
+                .defineInRange("seethingHeat", 1600.0d, 0.0d, 10000.0d);
         builder.pop();
 
         builder.comment("Air delivered by Create Encased Fan when blowing horizontally.")
