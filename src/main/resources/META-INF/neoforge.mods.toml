@@ -42,7 +42,7 @@ displayName="${mod_name}" #mandatory
 #credits="" #optional
 
 # The authors of the mod, displayed in the mod UI (optional)
-#authors=""
+authors="claustra01"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
@@ -52,6 +52,10 @@ Powered TFC.
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
 [[mixins]]
 config="poweredtfc.mixins.json"
+
+# Optional compatibility mixins (loaded only when their targets are present).
+[[mixins]]
+config="poweredtfc.moreburners.mixins.json"
 
 # The [[accessTransformers]] block allows you to declare where your AT file is.
 # If this block is omitted, a fallback attempt will be made to load an AT from META-INF/accesstransformer.cfg
@@ -98,6 +102,13 @@ config="poweredtfc.mixins.json"
 [[dependencies.${mod_id}]]
     modId="tfc"
     type="required"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="moreburners"
+    type="optional"
     versionRange="[0,)"
     ordering="AFTER"
     side="BOTH"
